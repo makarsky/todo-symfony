@@ -1,0 +1,11 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <h1>Welcome to Todo Application</h1>
+    <div>
+        <a href="{{ path('login') }}">Log in</a>
+    </div>
+    <div>
+        <a href="{{ path('register') }}">Register</a>
+    </div>
+{% endblock %}
