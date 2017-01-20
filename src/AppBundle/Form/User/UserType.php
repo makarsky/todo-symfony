@@ -6,7 +6,7 @@
  * Date: 15.01.17
  * Time: 22:23
  */
-namespace AppBundle\Form;
+namespace AppBundle\Form\User;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
