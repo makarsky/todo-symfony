@@ -48,6 +48,15 @@ class RegistrationController extends Controller
             $user->setRole('ROLE_USER');
             $em->persist($user);
             $em->flush();
+
+            $message = \Swift_Message::newInstance()
+                ->setSubject('Confirm Registration')
+                ->setFrom('catalog@gmail.com')
+                ->setTo($form->get('email')->getData())
+                ->setBody('Your account was successfully registered! Please, proceed this link for its activation:
+                ');
+            $this->get('mailer')->send($message);
+
             return $this->redirectToRoute('login');
         }
         return $this->render('auth/register.html.twig', [
