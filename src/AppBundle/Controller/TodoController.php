@@ -27,6 +27,13 @@ class TodoController extends Controller
      */
     public function loginAction()
     {
+        $message = \Swift_Message::newInstance()
+            ->setSubject('Hello Email')
+            ->setFrom('heal@gmail.com')
+            ->setTo('makarrski@gmail.com')
+            ->setBody('This is the text of the mail send by Swift using SMTP transport.');
+        $this->get('mailer')->send($message);
+
         $helper = $this->get('security.authentication_utils');
         return $this->render('auth/login.html.twig', array(
             'last_username' => $helper->getLastUsername(),
