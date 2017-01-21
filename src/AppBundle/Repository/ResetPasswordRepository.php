@@ -3,6 +3,6 @@ namespace AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 
-class ForgotPasswordRepository extends EntityRepository
+class ResetPasswordRepository extends EntityRepository
 {
 }
