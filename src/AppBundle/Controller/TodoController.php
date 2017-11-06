@@ -31,10 +31,11 @@ class TodoController extends Controller
     public function loginAction()
     {
         $helper = $this->get('security.authentication_utils');
-        return $this->render('auth/login.html.twig', array(
+        
+        return $this->render('auth/login.html.twig', [
             'last_username' => $helper->getLastUsername(),
             'error' => $helper->getLastAuthenticationError(),
-        ));
+        ]);
     }
 
     /**
@@ -58,6 +59,7 @@ class TodoController extends Controller
         if ($form->isSubmitted()) {
             $email = $form->get('email')->getData();
             $user = $userRep->findOneByEmail($email);
+            
             if (!is_null($user)) {
                 $resetPassword = new ResetPassword();
                 $resetPassword->setEmail($email);
@@ -70,15 +72,18 @@ class TodoController extends Controller
                     ->setTo($email)
                     ->setBody('To reset you password please 
                     follow this link http://localhost:8000/password_recovery/' . $hash);
+                
                 $this->get('mailer')->send($message);
                 $em->persist($resetPassword);
                 $em->flush();
                 $this->addFlash('notice', 'Instructions were sent to you email!');
             } else {
                 $this->addFlash('notice', 'User with that email not found!');
+                
                 return $this->redirectToRoute('reset_password');
             }
         }
+        
         return $this->render('auth/reset_password.html.twig', [
             'form' => $form->createView()
         ]);
@@ -98,6 +103,7 @@ class TodoController extends Controller
         if (!is_null($forgetter)) {
             $form = $this->createForm(RecoveryPasswordType::class);
             $form->handleRequest($request);
+            
             if ($form->isSubmitted() && $form->isValid()) {
                 $user = $userRep->findOneByEmail($forgetter->getEmail());
                 $encoder = $this->get('security.password_encoder');
@@ -111,6 +117,7 @@ class TodoController extends Controller
                 $this->addFlash('notice', 'Your password has been reset successfully!');
                 return $this->redirectToRoute('login');
             }
+            
             return $this->render('auth/reset_password.html.twig', [
                 'form' => $form->createView()
             ]);
@@ -125,6 +132,7 @@ class TodoController extends Controller
     public function todoAction()
     {
         $todos = $this->getDoctrine()->getRepository('AppBundle:Todo')->findAll();
+        
         return $this->render('todo/index.html.twig', [
             'todos' => $todos,
         ]);
@@ -148,7 +156,7 @@ class TodoController extends Controller
 
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             // Get Data
             $name = $form['name']->getData();
             $category = $form['category']->getData();
@@ -200,7 +208,7 @@ class TodoController extends Controller
 
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             // Get Data
             $name = $form['name']->getData();
             $category = $form['category']->getData();
