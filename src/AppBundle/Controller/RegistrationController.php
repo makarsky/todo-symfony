@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: root
- * Date: 15.01.17
- * Time: 20:35
- */
 
 namespace AppBundle\Controller;
 
@@ -59,6 +53,7 @@ class RegistrationController extends Controller
 
             return $this->redirectToRoute('login');
         }
+        
         return $this->render('auth/register.html.twig', [
             'form' => $form->createView(),
         ]);
