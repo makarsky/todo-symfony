@@ -66,7 +66,7 @@ class TodoController extends Controller
 
                 $message = \Swift_Message::newInstance()
                     ->setSubject('Password recovery')
-                    ->setFrom('healyourwealth@gmail.com')
+                    ->setFrom('catalog@gmail.com')
                     ->setTo($email)
                     ->setBody('To reset you password please 
                     follow this link http://localhost:8000/password_recovery/' . $hash);
