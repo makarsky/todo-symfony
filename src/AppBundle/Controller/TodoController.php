@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\ResetPassword;
 use AppBundle\Entity\Todo;
+use AppBundle\Entity\User;
 use AppBundle\Form\User\RecoveryPasswordType;
 use AppBundle\Form\User\ResetPasswordType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -15,6 +16,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class TodoController extends Controller
 {
@@ -48,6 +50,8 @@ class TodoController extends Controller
 
     /**
      * @Route("/reset_password", name="reset_password")
+     * @param Request $request
+     * @return RedirectResponse|Response
      */
     public function resetPasswordAction(Request $request)
     {
@@ -59,7 +63,7 @@ class TodoController extends Controller
 
         if ($form->isSubmitted()) {
             $email = $form->get('email')->getData();
-            $user = $userRep->findOneByEmail($email);
+            $user = $userRep->findOneBy(['email' => $email]);
             
             if (!is_null($user)) {
                 $resetPassword = new ResetPassword();
@@ -92,21 +96,24 @@ class TodoController extends Controller
 
     /**
      * @Route("/password_recovery/{hash}", name="password_recovery")
+     * @param Request $request
+     * @param $hashKey
+     * @return RedirectResponse|Response
      */
-    public function passwordRecoveryAction(Request $request, $hash)
+    public function passwordRecoveryAction(Request $request, $hashKey)
     {
         $em = $this->getDoctrine()->getManager();
-        $userRep = $em->getRepository('AppBundle:User');
-        $resetRep = $em->getRepository('AppBundle:ResetPassword');
+        $userRep = $em->getRepository(User::class);
+        $resetRep = $em->getRepository(ResetPassword::class);
 
-        $forgetter = $resetRep->findOneByHashKey($hash);
+        $forgetter = $resetRep->findOneBy(['hashKey' => $hashKey]);
 
         if (!is_null($forgetter)) {
             $form = $this->createForm(RecoveryPasswordType::class);
             $form->handleRequest($request);
             
             if ($form->isSubmitted() && $form->isValid()) {
-                $user = $userRep->findOneByEmail($forgetter->getEmail());
+                $user = $userRep->findOneBy(['email' => $forgetter->getEmail()]);
                 $encoder = $this->get('security.password_encoder');
                 $user->setPassword($encoder->encodePassword(
                     $user,
@@ -141,6 +148,8 @@ class TodoController extends Controller
 
     /**
      * @Route("/todo/create", name="todo_create")
+     * @param Request $request
+     * @return RedirectResponse|Response
      */
     public function createAction(Request $request)
     {
@@ -192,6 +201,9 @@ class TodoController extends Controller
 
     /**
      * @Route("/todo/edit/{id}", name="todo_edit")
+     * @param $id
+     * @param Request $request
+     * @return RedirectResponse|Response
      */
     public function editAction($id, Request $request)
     {
@@ -242,14 +254,18 @@ class TodoController extends Controller
         return $this->render('todo/edit.html.twig', [
             'todo' => $todo,
             'form' => $form->createView(),
-        ]);    }
+        ]);
+    }
 
     /**
      * @Route("/todo/details/{id}", name="todo_details")
+     * @param $id
+     * @return Response
      */
     public function detailsAction($id)
     {
         $todo = $this->getDoctrine()->getRepository('AppBundle:Todo')->find($id);
+
         return $this->render('todo/details.html.twig', [
             'todo' => $todo,
         ]);
