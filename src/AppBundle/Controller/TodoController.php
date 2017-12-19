@@ -13,6 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 class TodoController extends Controller
@@ -256,6 +257,8 @@ class TodoController extends Controller
 
     /**
      * @Route("/todo/delete/{id}", name="todo_delete")
+     * @param $id
+     * @return RedirectResponse
      */
     public function deleteAction($id)
     {
