@@ -7,7 +7,6 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
 
     <title>{% block title %}Sign in{% endblock %}</title>
 
@@ -25,9 +24,9 @@
 
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="form-group" style="text-align: center">
-                            <a href="#"><img src="https://s13.postimg.org/r7a1xqv1j/1480623034_lock.png" alt="login" class="icon-login"></a>
-                            <h2 class="first-login">SIGN IN</h2>
+                        <div class="form-group" style="text-align: center; margin-top: 5%">
+                            <a href="#"><img src="https://s13.postimg.org/r7a1xqv1j/1480623034_lock.png" alt="login" class="icon-login" style="width: 15%; height: 15%;"></a>
+                            <h2>SIGN IN</h2>
                         </div>
 
                         {% for flash_message in app.session.flashbag.get('notice') %}
@@ -44,33 +43,33 @@
                         <form action="{{ path('login') }}" method="post">
                             <div class="form-group">
                                 <label for="username">Email:</label>
-                                <input type="email" class="form-control" id="username" name="_username" required value="{{ last_username }}" />
+                                <input type="email" class="form-control" id="username" name="_username" required value="{{ last_username }}" placeholder="Email">
                             </div>
 
                             <div class="form-group">
                                 <label for="password">Password:</label>
-                                <input type="password" id="password" class="form-control" name="_password" required/>
+                                <input type="password" id="password" class="form-control" name="_password" required placeholder="Password">
                             </div>
 
                             <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"/>
 
                             <div class="row">
-                                <div class="col-sm-6">
+                                <div class="col-sm-6 col-xs-6">
                                     <div class="checkbox">
                                         <label><input type="checkbox">Remember me</label>
                                     </div>
                                 </div>
-                                <div class="col-sm-6" style="text-align: right">
+                                <div class="form-group col-sm-6 col-xs-6" style="text-align: right">
                                     <button type="submit" class="btn btn-primary">Sign in</button>
                                 </div>
                             </div>
 
                         </form>
 
-                        <div>
-                            <a href="{{ path('register') }}">Register</a>
+                        <div class="form-group">
+                            <a href="{{ path('register') }}">Sign up</a>
                         </div>
-                        <div>
+                        <div class="form-group">
                             <a href="{{ path('reset_password') }}">Forgot your password?</a>
                         </div>
                     </div>
