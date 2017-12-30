@@ -24,24 +24,17 @@ class UserType extends AbstractType
             ->add('username', TextType::class, [
                 'attr' => [
                     'class' => 'form-control',
-                    'style' => 'margin-bottom:15px'
                 ]
             ])
-            ->add('password', RepeatedType::class, [
-                'type' => PasswordType::class,
-                'first_options'  => ['label' => 'Password', 'attr' => [
+            ->add('password', PasswordType::class, [
+                'label' => 'Password',
+                'attr' => [
                     'class' => 'form-control',
-                    'style' => 'margin-bottom:15px'
-                ],],
-                'second_options' => ['label' => 'Repeat Password', 'attr' => [
-                    'class' => 'form-control',
-                    'style' => 'margin-bottom:15px'
-                ],],
+                ],
             ])
             ->add('email', EmailType::class, [
                 'attr' => [
                     'class' => 'form-control',
-                    'style' => 'margin-bottom:15px'
                 ]
             ]);
     }
