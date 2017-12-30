@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Todo;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -83,14 +84,13 @@ class TodoController extends Controller
 
     /**
      * @Route("/todo/edit/{id}", name="todo_edit")
-     * @param $id
      * @param Request $request
+     * @param $todo
+     * @ParamConverter("todo", class="AppBundle:Todo")
      * @return RedirectResponse|Response
      */
-    public function editAction($id, Request $request)
+    public function editAction(Request $request, Todo $todo)
     {
-        $todo = $this->getDoctrine()->getRepository('AppBundle:Todo')->find($id);
-
         $form = $this->createFormBuilder($todo)
             ->add('name', TextType::class, ['attr' => ['class' => 'form-control', 'style' => 'margin-bottom:15px']])
             ->add('category', TextType::class, ['attr' => ['class' => 'form-control', 'style' => 'margin-bottom:15px']])
@@ -113,7 +113,6 @@ class TodoController extends Controller
             $now = new \DateTime('now');
 
             $em = $this->getDoctrine()->getManager();
-            $todo = $em->getRepository('AppBundle:Todo')->find($id);
 
             $todo->setName($name);
             $todo->setCategory($category);
