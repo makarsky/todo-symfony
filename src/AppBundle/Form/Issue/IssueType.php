@@ -48,7 +48,7 @@ class IssueType extends AbstractType
             ])
             ->add('due_date', DateTimeType::class, [
                 'attr' => [
-                    'class' => 'formcontrol',
+                    'class' => 'form-control',
                     'style' => 'margin-bottom:15px'
                 ]
             ])
@@ -56,8 +56,7 @@ class IssueType extends AbstractType
                 'label' => 'Create Todo',
                 'attr' => [
                     'class' => 'btn btn-primary',
-                    'style' => 'margin-bottom:15px'
-                ]
+                    'style' => 'margin-bottom:15px']
             ]);
     }
 
