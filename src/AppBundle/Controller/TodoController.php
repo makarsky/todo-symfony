@@ -31,41 +31,28 @@ class TodoController extends Controller
     }
 
     /**
-     * @Route("/todo/create", name="todo_create")
+     * @Route("/issue/create", name="create_issue")
      * @param Request $request
      * @return RedirectResponse|Response
      */
     public function createAction(Request $request)
     {
-        $todo = new Todo();
+        $issue = new Todo();
 
-        $form = $this->createForm(IssueType::class, $todo);
+        $form = $this->createForm(IssueType::class, $issue);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $name = $form['name']->getData();
-            $category = $form['category']->getData();
-            $description = $form['description']->getData();
-            $priority = $form['priority']->getData();
-            $dueDate = $form['due_date']->getData();
-
-            $now = new \DateTime('now');
-
-            $todo->setName($name);
-            $todo->setCategory($category);
-            $todo->setDescription($description);
-            $todo->setPriority($priority);
-            $todo->setDueDate($dueDate);
-            $todo->setCreateDate($now);
+            $issue->setCreateDate(new \DateTime());
 
             $em = $this->getDoctrine()->getManager();
-            $em->persist($todo);
+            $em->persist($issue);
             $em->flush();
 
             $this->addFlash(
                 'notice',
-                'Todo Created'
+                'Issue Created'
             );
 
             return $this->redirectToRoute('todo_index');
