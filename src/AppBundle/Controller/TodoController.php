@@ -134,21 +134,21 @@ class TodoController extends Controller
     }
 
     /**
-     * @Route("/todo/delete/{id}", name="todo_delete")
-     * @param $id
+     * @Route("/issue/delete/{id}", name="delete_issue")
+     * @param $issue
+     * @ParamConverter("issue", class="AppBundle:Todo")
      * @return RedirectResponse
      */
-    public function deleteAction($id)
+    public function deleteAction(Todo $issue)
     {
         $em = $this->getDoctrine()->getManager();
-        $todo = $em->getRepository('AppBundle:Todo')->find($id);
 
-        $em->remove($todo);
+        $em->remove($issue);
         $em->flush();
 
         $this->addFlash(
             'notice',
-            'Todo Removed'
+            'Issue Removed'
         );
 
         return $this->redirectToRoute('todo_index');
