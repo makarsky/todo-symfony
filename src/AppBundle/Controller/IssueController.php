@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class TodoController extends Controller
+class IssueController extends Controller
 {
     /**
      * @Route("/issue/list", name="issue_list")
