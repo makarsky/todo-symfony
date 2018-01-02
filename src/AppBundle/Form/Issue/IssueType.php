@@ -2,7 +2,7 @@
 
 namespace AppBundle\Form\Issue;
 
-use AppBundle\Entity\Todo;
+use AppBundle\Entity\Issue;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
@@ -66,7 +66,7 @@ class IssueType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Todo::class,
+            'data_class' => Issue::class,
         ]);
     }
 }
