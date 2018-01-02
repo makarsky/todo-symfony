@@ -16,11 +16,11 @@ class TodoController extends Controller
     /**
      * @Route("/issue/list", name="issue_list")
      */
-    public function todoAction()
+    public function listAction()
     {
         $issues = $this->getDoctrine()->getRepository(Issue::class)->findAll();
         
-        return $this->render('todo/index.html.twig', [
+        return $this->render('issue/index.html.twig', [
             'issues' => $issues,
         ]);
     }
@@ -53,7 +53,7 @@ class TodoController extends Controller
             return $this->redirectToRoute('issue_list');
         }
 
-        return $this->render('todo/create.html.twig', [
+        return $this->render('issue/create.html.twig', [
             'form' => $form->createView(),
         ]);
     }
@@ -84,7 +84,7 @@ class TodoController extends Controller
             return $this->redirectToRoute('issue_list');
         }
 
-        return $this->render('todo/edit.html.twig', [
+        return $this->render('issue/edit.html.twig', [
             'issue' => $issue,
             'form' => $form->createView(),
         ]);
@@ -99,7 +99,7 @@ class TodoController extends Controller
     {
         $issue = $this->getDoctrine()->getRepository(Issue::class)->find($id);
 
-        return $this->render('todo/details.html.twig', [
+        return $this->render('issue/details.html.twig', [
             'issue' => $issue,
         ]);
     }
