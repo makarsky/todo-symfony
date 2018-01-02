@@ -5,12 +5,12 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Todo
+ * Issue
  *
- * @ORM\Table(name="todo")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\TodoRepository")
+ * @ORM\Table(name="issue")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\IssueRepository")
  */
-class Todo
+class Issue
 {
     /**
      * @var int
@@ -79,7 +79,7 @@ class Todo
      *
      * @param string $name
      *
-     * @return Todo
+     * @return Issue
      */
     public function setName($name)
     {
@@ -103,7 +103,7 @@ class Todo
      *
      * @param string $category
      *
-     * @return Todo
+     * @return Issue
      */
     public function setCategory($category)
     {
@@ -127,7 +127,7 @@ class Todo
      *
      * @param string $description
      *
-     * @return Todo
+     * @return Issue
      */
     public function setDescription($description)
     {
@@ -151,7 +151,7 @@ class Todo
      *
      * @param string $priority
      *
-     * @return Todo
+     * @return Issue
      */
     public function setPriority($priority)
     {
@@ -175,7 +175,7 @@ class Todo
      *
      * @param \DateTime $dueDate
      *
-     * @return Todo
+     * @return Issue
      */
     public function setDueDate($dueDate)
     {
@@ -199,7 +199,7 @@ class Todo
      *
      * @param \DateTime $createDate
      *
-     * @return Todo
+     * @return Issue
      */
     public function setCreateDate($createDate)
     {
@@ -218,4 +218,3 @@ class Todo
         return $this->createDate;
     }
 }
-
