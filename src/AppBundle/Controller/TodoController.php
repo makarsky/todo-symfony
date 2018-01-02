@@ -2,7 +2,7 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\Todo;
+use AppBundle\Entity\Issue;
 use AppBundle\Form\Issue\IssueType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -14,14 +14,14 @@ use Symfony\Component\HttpFoundation\Response;
 class TodoController extends Controller
 {
     /**
-     * @Route("/todo", name="todo_index")
+     * @Route("/issue/list", name="issue_list")
      */
     public function todoAction()
     {
-        $todos = $this->getDoctrine()->getRepository('AppBundle:Todo')->findAll();
+        $issues = $this->getDoctrine()->getRepository(Issue::class)->findAll();
         
         return $this->render('todo/index.html.twig', [
-            'todos' => $todos,
+            'todos' => $issues,
         ]);
     }
 
@@ -32,7 +32,7 @@ class TodoController extends Controller
      */
     public function createAction(Request $request)
     {
-        $issue = new Todo();
+        $issue = new Issue();
 
         $form = $this->createForm(IssueType::class, $issue);
 
@@ -50,7 +50,7 @@ class TodoController extends Controller
                 'Issue Created'
             );
 
-            return $this->redirectToRoute('todo_index');
+            return $this->redirectToRoute('issue_list');
         }
 
         return $this->render('todo/create.html.twig', [
@@ -62,10 +62,10 @@ class TodoController extends Controller
      * @Route("/issue/edit/{id}", name="edit_issue")
      * @param Request $request
      * @param $issue
-     * @ParamConverter("issue", class="AppBundle:Todo")
+     * @ParamConverter("issue", class="AppBundle:Issue")
      * @return RedirectResponse|Response
      */
-    public function editAction(Request $request, Todo $issue)
+    public function editAction(Request $request, Issue $issue)
     {
         $form = $this->createForm(IssueType::class, $issue);
 
@@ -81,7 +81,7 @@ class TodoController extends Controller
                 'Issue Updated'
             );
 
-            return $this->redirectToRoute('todo_index');
+            return $this->redirectToRoute('issue_list');
         }
 
         return $this->render('todo/edit.html.twig', [
@@ -91,13 +91,13 @@ class TodoController extends Controller
     }
 
     /**
-     * @Route("/todo/details/{id}", name="todo_details")
+     * @Route("/issue/details/{id}", name="issue_details")
      * @param $id
      * @return Response
      */
     public function detailsAction($id)
     {
-        $todo = $this->getDoctrine()->getRepository('AppBundle:Todo')->find($id);
+        $todo = $this->getDoctrine()->getRepository(Issue::class)->find($id);
 
         return $this->render('todo/details.html.twig', [
             'todo' => $todo,
@@ -107,10 +107,10 @@ class TodoController extends Controller
     /**
      * @Route("/issue/delete/{id}", name="delete_issue")
      * @param $issue
-     * @ParamConverter("issue", class="AppBundle:Todo")
+     * @ParamConverter("issue", class="AppBundle:Issue")
      * @return RedirectResponse
      */
-    public function deleteAction(Todo $issue)
+    public function deleteAction(Issue $issue)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -122,7 +122,7 @@ class TodoController extends Controller
             'Issue Removed'
         );
 
-        return $this->redirectToRoute('todo_index');
+        return $this->redirectToRoute('issue_list');
     }
 
     // todo Create a Sortable & Responsive Grid With Muuri
