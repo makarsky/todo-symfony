@@ -21,7 +21,7 @@ class TodoController extends Controller
         $issues = $this->getDoctrine()->getRepository(Issue::class)->findAll();
         
         return $this->render('todo/index.html.twig', [
-            'todos' => $issues,
+            'issues' => $issues,
         ]);
     }
 
@@ -85,7 +85,7 @@ class TodoController extends Controller
         }
 
         return $this->render('todo/edit.html.twig', [
-            'todo' => $issue,
+            'issue' => $issue,
             'form' => $form->createView(),
         ]);
     }
@@ -97,10 +97,10 @@ class TodoController extends Controller
      */
     public function detailsAction($id)
     {
-        $todo = $this->getDoctrine()->getRepository(Issue::class)->find($id);
+        $issue = $this->getDoctrine()->getRepository(Issue::class)->find($id);
 
         return $this->render('todo/details.html.twig', [
-            'todo' => $todo,
+            'issue' => $issue,
         ]);
     }
 

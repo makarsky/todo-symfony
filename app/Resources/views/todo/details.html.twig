@@ -1,17 +1,17 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <a class="btn btn-default" href="/todo">Back to Todos</a>
+    <a class="btn btn-default" href="{{ path('issue_list') }}">Back to issues</a>
     <hr>
-    <h2 class="page-header">{{ todo.name }}</h2>
+    <h2 class="page-header">{{ issue.name }}</h2>
     <ul class="list-group">
-        <li class="list-group-item">Category: {{ todo.category }}</li>
-        <li class="list-group-item">Priority: {{ todo.priority }}</li>
+        <li class="list-group-item">Category: {{ issue.category }}</li>
+        <li class="list-group-item">Priority: {{ issue.priority }}</li>
         <li class="list-group-item">Due Date:
-            <strong>{{ todo.dueDate|date }}</strong>
+            <strong>{{ issue.dueDate|date }}</strong>
         </li>
     </ul>
     <p>
-        {{ todo.description }}
+        {{ issue.description }}
     </p>
 {% endblock %}
