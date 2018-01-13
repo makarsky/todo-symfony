@@ -24,17 +24,28 @@
             <h1 style="text-align: center;">Registration</h1>
             {{ form_start(form) }}
                 <div class="form-group">
-                    {{ form_row(form.username, { attr: { class: 'form-control', placeholder: 'Enter username' }}) }}
+                    {{ form_label(form.username) }}
+                    {{ form_widget(form.username, { attr: { class: 'form-control', placeholder: 'Enter username' }}) }}
                 </div>
                 <div class="form-group">
-                    {{ form_row(form.email, { attr: { class: 'form-control', placeholder: 'Enter email' }}) }}
+                    {{ form_label(form.email) }}
+                    {{ form_widget(form.email, { attr: { class: 'form-control', placeholder: 'Enter email' }}) }}
                 </div>
                 <div class="form-group">
-                    {{ form_row(form.password, { attr: { class: 'form-control', placeholder: 'Enter password' }}) }}
-                    <input type="checkbox" onclick="toggleVisibility(document.querySelector('{{ form.password.vars.id }}'))">Show Password
+                    {{ form_label(form.password) }}
+
+                    <div class="row">
+                        <div class="col-sm-8">
+                            {{ form_widget(form.password, { attr: { class: 'form-control', placeholder: 'Enter password' }}) }}
+                        </div>
+                        <div class="col-sm-4">
+                            <label><input type="checkbox" onclick="toggleVisibility({{ form.password.vars.id }})"> Show Password</label>
+                        </div>
+                    </div>
+
                 </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                <div class="form-group text-right" style="child-align: right;">
+                    <button type="submit" class="btn btn-primary text-right">Submit</button>
                 </div>
             {{ form_end(form) }}
         </div>
