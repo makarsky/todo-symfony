@@ -3,12 +3,10 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
- * @UniqueEntity(fields="email", message="Email is already taken")
  */
 class User extends \FOS\UserBundle\Model\User implements \Serializable
 {
@@ -17,7 +15,7 @@ class User extends \FOS\UserBundle\Model\User implements \Serializable
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /** @see \Serializable::serialize() */
     public function serialize()

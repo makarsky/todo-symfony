@@ -30,8 +30,8 @@ class RegistrationController extends Controller
                 $user,
                 $form->get('password')->getData()
             ));
-            $user->setIsActive(true);
-            $user->setRole('ROLE_USER');
+            $user->setEnabled(true);
+            $user->setRoles(['ROLE_USER']);
             $em->persist($user);
             $em->flush();
 
