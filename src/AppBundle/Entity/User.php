@@ -17,16 +17,21 @@ class User extends \FOS\UserBundle\Model\User implements \Serializable
      */
     protected $id;
 
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     /** @see \Serializable::serialize() */
     public function serialize()
     {
-        return serialize(array(
+        return serialize([
             $this->id,
             $this->username,
             $this->password,
             // see section on salt below
             // $this->salt,
-        ));
+        ]);
     }
 
     /** @see \Serializable::unserialize() */
