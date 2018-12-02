@@ -23,26 +23,6 @@ class SecurityController extends Controller
     }
 
     /**
-     * @Route("/login", name="login")
-     */
-    public function loginAction()
-    {
-        $helper = $this->get('security.authentication_utils');
-        
-        return $this->render('auth/login.html.twig', [
-            'last_username' => $helper->getLastUsername(),
-            'error' => $helper->getLastAuthenticationError(),
-        ]);
-    }
-
-    /**
-     * @Route("/logout", name="logout")
-     */
-    public function logoutAction()
-    {
-    }
-
-    /**
      * @Route("/reset_password", name="reset_password")
      * @param Request $request
      * @return RedirectResponse|Response
@@ -58,7 +38,7 @@ class SecurityController extends Controller
         if ($form->isSubmitted()) {
             $email = $form->get('email')->getData();
             $user = $userRep->findOneBy(['email' => $email]);
-            
+
             if (!is_null($user)) {
                 $resetPassword = new ResetPassword();
                 $resetPassword->setEmail($email);
@@ -71,18 +51,18 @@ class SecurityController extends Controller
                     ->setTo($email)
                     ->setBody('To reset you password please 
                     follow this link http://localhost:8000/password_recovery/' . $hash);
-                
+
                 $this->get('mailer')->send($message);
                 $em->persist($resetPassword);
                 $em->flush();
                 $this->addFlash('notice', 'Instructions were sent to you email!');
             } else {
                 $this->addFlash('notice', 'User with that email not found!');
-                
+
                 return $this->redirectToRoute('reset_password');
             }
         }
-        
+
         return $this->render('auth/reset_password.html.twig', [
             'form' => $form->createView()
         ]);
@@ -105,7 +85,7 @@ class SecurityController extends Controller
         if (!is_null($forgetter)) {
             $form = $this->createForm(RecoveryPasswordType::class);
             $form->handleRequest($request);
-            
+
             if ($form->isSubmitted() && $form->isValid()) {
                 $user = $userRep->findOneBy(['email' => $forgetter->getEmail()]);
                 $encoder = $this->get('security.password_encoder');
@@ -119,7 +99,7 @@ class SecurityController extends Controller
                 $this->addFlash('notice', 'Your password has been reset successfully!');
                 return $this->redirectToRoute('login');
             }
-            
+
             return $this->render('auth/reset_password.html.twig', [
                 'form' => $form->createView()
             ]);
