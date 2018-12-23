@@ -13,7 +13,7 @@ class RegistrationController extends Controller
 {
     /**
      * @param Request $request
-     * @Route("/register", name="register")
+     * @Route("/registerold", name="registerold")
      * @return Response
      */
     public function registerAction(Request $request)

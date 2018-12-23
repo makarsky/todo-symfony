@@ -10,7 +10,6 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group" style="text-align: center; margin-top: 5%">
-                    <a href="#"><img src="https://s13.postimg.org/r7a1xqv1j/1480623034_lock.png" alt="login" class="icon-login" style="width: 15%; height: 15%;"></a>
                     <h2>SIGN IN</h2>
                 </div>
 
@@ -31,7 +30,7 @@
                     {% endif %}
 
                     <div class="form-group">
-                        <label for="username">Email:</label>
+                        <label for="username">Username or email:</label>
                         <input type="text" class="form-control" id="username" name="_username" required value="{{ last_username }}" placeholder="Email" autocomplete>
                     </div>
 
@@ -54,7 +53,7 @@
                 </form>
 
                 <div class="form-group">
-                    <a href="{{ path('register') }}">Sign up</a>
+                    <a href="{{ path('fos_user_registration_register') }}">Sign up</a>
                 </div>
                 <div class="form-group">
                     <a href="{{ path('reset_password') }}">Forgot your password?</a>
