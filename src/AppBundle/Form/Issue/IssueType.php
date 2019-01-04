@@ -51,12 +51,6 @@ class IssueType extends AbstractType
                     'class' => 'form-control',
                     'style' => 'margin-bottom:15px'
                 ]
-            ])
-            ->add('save', SubmitType::class, [
-                'label' => 'Create Todo',
-                'attr' => [
-                    'class' => 'btn btn-primary',
-                    'style' => 'margin-bottom:15px']
             ]);
     }
 
