@@ -1,9 +1,21 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h2 class="page-header">Edit Issue</h2>
+    <h2 class="page-header">
+        {% if formType == 'create' %}Create Issue{% elseif formType == 'edit' %}Edit Issue{% endif %}
+    </h2>
     {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <input type="submit" class="btn btn-primary" value="Save">
+    {{ form_label(form.name) }}
+    {{ form_widget(form.name) }}
+    {{ form_label(form.category) }}
+    {{ form_widget(form.category) }}
+    {{ form_label(form.description) }}
+    {{ form_widget(form.description) }}
+    {{ form_label(form.priority) }}
+    {{ form_widget(form.priority) }}
+    {{ form_label(form.dueDate) }}
+    {{ form_widget(form.dueDate) }}
+    <input type="submit" class="btn btn-primary"
+           value="{% if formType == 'create' %}Create{% elseif formType == 'edit' %}Save{% endif %}">
     {{ form_end(form) }}
 {% endblock %}
