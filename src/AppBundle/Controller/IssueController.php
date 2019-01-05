@@ -29,6 +29,7 @@ class IssueController extends Controller
      * @Route("/issue/create", name="create_issue")
      * @param Request $request
      * @return RedirectResponse|Response
+     * @throws \Exception
      */
     public function createAction(Request $request)
     {
@@ -53,8 +54,9 @@ class IssueController extends Controller
             return $this->redirectToRoute('issue_list');
         }
 
-        return $this->render('issue/create.html.twig', [
+        return $this->render('issue/edit.html.twig', [
             'form' => $form->createView(),
+            'formType' => 'create',
         ]);
     }
 
@@ -87,6 +89,7 @@ class IssueController extends Controller
         return $this->render('issue/edit.html.twig', [
             'issue' => $issue,
             'form' => $form->createView(),
+            'formType' => 'edit',
         ]);
     }
 
