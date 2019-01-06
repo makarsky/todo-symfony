@@ -16,41 +16,17 @@ class IssueType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', TextType::class, [
-                'attr' => [
-                    'class' => 'form-control',
-                    'style' => 'margin-bottom:15px'
-                ]
-            ])
-            ->add('category', TextType::class, [
-                'attr' => [
-                    'class' => 'form-control',
-                    'style' => 'margin-bottom:15px'
-                ]
-            ])
-            ->add('description', TextareaType::class, [
-                'attr' => [
-                    'class' => 'form-control',
-                    'style' => 'margin-bottom:15px'
-                ]
-            ])
+            ->add('name', TextType::class)
+            ->add('category', TextType::class)
+            ->add('description', TextareaType::class)
             ->add('priority', ChoiceType::class, [
                 'choices' => [
                     'Low' => 'Low',
                     'Normal' => 'Normal',
                     'High' => 'High'
                 ],
-                'attr' => [
-                    'class' => 'form-control',
-                    'style' => 'margin-bottom:15px'
-                ]
             ])
-            ->add('dueDate', DateTimeType::class, [
-                'attr' => [
-                    'class' => 'form-control',
-                    'style' => 'margin-bottom:15px'
-                ]
-            ]);
+            ->add('dueDate', DateTimeType::class);
     }
 
     /**
