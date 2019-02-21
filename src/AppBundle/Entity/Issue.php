@@ -5,8 +5,6 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Issue
- *
  * @ORM\Table(name="issue")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\IssueRepository")
  */
@@ -62,7 +60,6 @@ class Issue
      * @ORM\Column(name="create_date", type="datetime")
      */
     private $createDate;
-
 
     /**
      * Get id
