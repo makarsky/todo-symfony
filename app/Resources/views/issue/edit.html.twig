@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Edit issue{% endblock %}
+
 {% block body %}
     <h2 class="page-header">
         {% if formType == 'create' %}Create Issue{% elseif formType == 'edit' %}Edit Issue{% endif %}

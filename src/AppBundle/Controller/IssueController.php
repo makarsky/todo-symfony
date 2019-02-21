@@ -11,10 +11,13 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * @Route("/issue")
+ */
 class IssueController extends Controller
 {
     /**
-     * @Route("/issue/list", name="issue_list")
+     * @Route("/list", name="issue_list")
      */
     public function listAction()
     {
@@ -26,7 +29,7 @@ class IssueController extends Controller
     }
 
     /**
-     * @Route("/issue/create", name="create_issue")
+     * @Route("/add", name="add_issue")
      * @param Request $request
      * @return RedirectResponse|Response
      * @throws \Exception
@@ -61,7 +64,7 @@ class IssueController extends Controller
     }
 
     /**
-     * @Route("/issue/edit/{id}", name="edit_issue")
+     * @Route("/edit/{id}", name="edit_issue")
      * @param Request $request
      * @param $issue
      * @ParamConverter("issue", class="AppBundle:Issue")
@@ -94,7 +97,7 @@ class IssueController extends Controller
     }
 
     /**
-     * @Route("/issue/details/{id}", name="issue_details")
+     * @Route("/details/{id}", name="issue_details")
      * @param $id
      * @return Response
      */
@@ -108,7 +111,7 @@ class IssueController extends Controller
     }
 
     /**
-     * @Route("/issue/delete/{id}", name="delete_issue")
+     * @Route("/delete/{id}", name="delete_issue")
      * @param $issue
      * @ParamConverter("issue", class="AppBundle:Issue")
      * @return RedirectResponse
